@@ -1,25 +1,28 @@
 # OCR + Automatic Translation
 
-Pipeline de **Optical Character Recognition** que extrai texto de imagens e o **traduz automaticamente**.
+> *Academic / portfolio project — Applied AI.*
+
+An **Optical Character Recognition** pipeline that extracts text from images and **translates it automatically**.
 
 ## Pipeline
-1. **OCR** — extrai texto da imagem com **Tesseract** (`pytesseract`) — suporta `por`/`eng`.
-2. **(opcional) Modelos** — uso de **`transformers`** (HuggingFace) p/ tarefas de visão/linguagem.
-3. **Tradução** — tradução automática do texto com **`deep-translator`**.
+1. **OCR** — extracts text from the image with **Tesseract** (`pytesseract`) — supports `por` / `eng`.
+2. **(optional) Models** — **`transformers`** (HuggingFace) for vision / language tasks.
+3. **Translation** — automatic translation of the extracted text with **`deep-translator`**.
 
 ## Setup
-- Instale o Tesseract OCR no sistema (Windows: instalador UB-Mannheim; Linux: `apt install tesseract-ocr`) + o idioma `por`.
+- Install Tesseract OCR on your system (Windows: UB-Mannheim installer; Linux: `apt install tesseract-ocr`) plus the `por` language pack.
 - `pip install -r requirements.txt`
 
-## Como rodar
+## How to run
 ```bash
 jupyter notebook ocr_translation.ipynb
 ```
-Aponte para uma imagem de entrada e escolha os idiomas de OCR/tradução.
+Point it at an input image and choose the OCR / translation languages.
 
-## Possíveis extensões
-- **Pré-processamento** da imagem (deskew/threshold/denoise com OpenCV) p/ melhorar a acurácia do OCR.
-- Comparar Tesseract vs um modelo **TrOCR** (transformers) e medir CER/WER.
-- Empacotar como API (FastAPI) + demo.
+## Roadmap (possible extensions)
+- Image **pre-processing** (deskew / threshold / denoise with OpenCV) to improve OCR accuracy.
+- Compare Tesseract vs a **TrOCR** (transformers) model and measure CER / WER.
+- Package as an API (FastAPI) + demo.
 
-> Notebook acadêmico/portfólio (IA aplicada). Outputs limpos; imagens/modelos não versionados.
+## Stack
+Python · pytesseract (Tesseract) · transformers · deep-translator
