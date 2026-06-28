@@ -1,0 +1,6 @@
+pytesseract
+Pillow
+transformers
+torch
+deep-translator
+opencv-python
