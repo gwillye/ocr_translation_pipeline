@@ -1,5 +1,6 @@
 pytesseract
 Pillow
+numpy
 transformers
 torch
 deep-translator

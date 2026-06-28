@@ -1,28 +1,43 @@
 # OCR + Automatic Translation
 
-> *Academic / portfolio project — Applied AI.*
+Extracts text from images with **Tesseract OCR** and **translates it automatically**.
+Includes an **image-preprocessing step that significantly improves OCR accuracy** on
+noisy / low-contrast inputs.
 
-An **Optical Character Recognition** pipeline that extracts text from images and **translates it automatically**.
+## ✨ Improvement (measured)
+On a noisy, low-contrast test image the raw OCR returns **nothing**; after preprocessing
+(denoise → autocontrast → binarization) it reads the text **perfectly**:
 
-## Pipeline
-1. **OCR** — extracts text from the image with **Tesseract** (`pytesseract`) — supports `por` / `eng`.
-2. **(optional) Models** — **`transformers`** (HuggingFace) for vision / language tasks.
-3. **Translation** — automatic translation of the extracted text with **`deep-translator`**.
+| Path | OCR output | accuracy |
+|---|---|---:|
+| Raw | `''` | **0.00** |
+| Preprocessed | `Analise de dados e OCR aplicado em 2026` | **1.00** |
+
+Reproduce it: `python demo.py`.
+
+## Files
+- **`ocr_utils.py`** — clean, reusable API:
+  - `preprocess_for_ocr(image)` — grayscale → median denoise → autocontrast → binarize.
+  - `ocr_image(src, lang="eng", preprocess=True)` — Tesseract wrapper (path or PIL image).
+  - `translate_text(text, target="en")` — translation via `deep-translator`.
+  - `ocr_and_translate(src, ...)` — full OCR → translation pipeline.
+- **`demo.py`** — reproducible raw-vs-preprocessed benchmark (the table above).
+- **`ocr_translation.ipynb`** — original exploratory notebook (outputs cleared).
 
 ## Setup
-- Install Tesseract OCR on your system (Windows: UB-Mannheim installer; Linux: `apt install tesseract-ocr`) plus the `por` language pack.
-- `pip install -r requirements.txt`
+1. Install **Tesseract** (Windows: UB-Mannheim installer → `C:\Program Files\Tesseract-OCR`; Linux: `apt install tesseract-ocr`). For Portuguese add the `por` language data.
+2. `pip install -r requirements.txt`
 
-## How to run
-```bash
-jupyter notebook ocr_translation.ipynb
+## Usage
+```python
+from ocr_utils import ocr_and_translate
+print(ocr_and_translate("invoice.png", ocr_lang="eng", target="en"))
 ```
-Point it at an input image and choose the OCR / translation languages.
 
-## Roadmap (possible extensions)
-- Image **pre-processing** (deskew / threshold / denoise with OpenCV) to improve OCR accuracy.
-- Compare Tesseract vs a **TrOCR** (transformers) model and measure CER / WER.
-- Package as an API (FastAPI) + demo.
+## Possible extensions
+- Compare Tesseract vs a transformer model (**TrOCR**) and measure CER/WER.
+- Adaptive thresholding / deskew (OpenCV) for photos and scans.
+- Wrap as a FastAPI service + small web demo.
 
-## Stack
-Python · pytesseract (Tesseract) · transformers · deep-translator
+> Portfolio project (applied AI). The preprocessing + tested utility module are the
+> improvement over the original course notebook. Images/models are not versioned.
