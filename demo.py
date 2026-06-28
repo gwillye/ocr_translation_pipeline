@@ -34,8 +34,8 @@ def main():
     print(f"Ground truth : {gt}")
     print(f"RAW OCR      : {raw!r}   acc={_acc(raw, gt):.2f}")
     print(f"PREPROCESSED : {prep!r}   acc={_acc(prep, gt):.2f}")
-    print("\n→ O preprocessing (denoise + autocontraste + binarização) recupera o texto"
-          " que o OCR cru não consegue ler.")
+    print("\n-> O preprocessing (denoise + autocontraste + binarizacao) recupera o texto"
+          " que o OCR cru nao consegue ler.")
 
 
 if __name__ == "__main__":

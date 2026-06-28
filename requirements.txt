@@ -1,7 +1,22 @@
+# --- core OCR pipeline (always needed) ---
 pytesseract
 Pillow
 numpy
-transformers
-torch
-deep-translator
 opencv-python
+
+# --- metrics ---
+jiwer            # CER/WER (metrics.py falls back to a built-in Levenshtein if absent)
+
+# --- translation (original pipeline) ---
+deep-translator
+
+# --- transformer OCR (TrOCR comparison) ---
+# ~1.4 GB model download on first use; CPU works (slow). Optional: the rest of
+# the pipeline runs without these.
+torch
+transformers
+
+# --- FastAPI service + web demo ---
+fastapi
+uvicorn[standard]
+python-multipart   # required by FastAPI for multipart/form-data uploads

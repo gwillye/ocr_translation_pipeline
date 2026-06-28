@@ -3,6 +3,8 @@
 *.jpeg
 data/
 models/
+sample_images/
+preprocessed_out.png
 .venv/
 __pycache__/
 .ipynb_checkpoints/
